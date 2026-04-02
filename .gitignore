@@ -1,0 +1,12 @@
+# Claude Code settings
+settings.json
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*~

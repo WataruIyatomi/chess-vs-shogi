@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess vs Shogi | 将棋 vs チェス</title>
+    <meta name="description" content="Chess and Shogi battle on an 8x8 board. Play this unique hybrid strategy game.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <span class="logo-chess">♔</span>
+            <span class="logo-vs">VS</span>
+            <span class="logo-shogi">王</span>
+            <span class="logo-text">Chess vs Shogi</span>
+        </div>
+        <div class="game-controls">
+            <button id="btn-new-game" class="btn btn-primary">New Game</button>
+            <button id="btn-undo" class="btn btn-secondary">Undo</button>
+            <button id="btn-flip" class="btn btn-secondary">Flip Board</button>
+            <button id="btn-mute" class="btn btn-secondary" title="Toggle sound">♪</button>
+        </div>
+    </header>
+
+    <main class="game-container">
+        <!-- Shogi player panel (top) -->
+        <div class="player-panel top-panel" id="panel-shogi">
+            <div class="player-info">
+                <div class="player-avatar shogi-avatar">将</div>
+                <div class="player-details">
+                    <span class="player-name">将棋 (Shogi)</span>
+                    <span class="player-side">先手 / Black</span>
+                </div>
+                <div class="turn-indicator" id="turn-shogi"></div>
+            </div>
+            <div class="hand-pieces" id="hand-shogi"></div>
+        </div>
+
+        <!-- Board -->
+        <div class="board-wrapper">
+            <div class="board-coordinates coords-top" id="coords-top"></div>
+            <div class="board-row-wrapper">
+                <div class="board-coordinates coords-left" id="coords-left"></div>
+                <div class="board" id="board"></div>
+                <div class="board-coordinates coords-right" id="coords-right"></div>
+            </div>
+            <div class="board-coordinates coords-bottom" id="coords-bottom"></div>
+        </div>
+
+        <!-- Chess player panel (bottom) -->
+        <div class="player-panel bottom-panel" id="panel-chess">
+            <div class="player-info">
+                <div class="player-avatar chess-avatar">♔</div>
+                <div class="player-details">
+                    <span class="player-name">Chess (チェス)</span>
+                    <span class="player-side">White / 後手</span>
+                </div>
+                <div class="turn-indicator" id="turn-chess"></div>
+            </div>
+            <div class="hand-pieces" id="hand-chess"></div>
+        </div>
+
+        <!-- Side panel -->
+        <aside class="side-panel">
+            <div class="game-info-card">
+                <h3>Game Status</h3>
+                <div id="game-status" class="status-text">Chess (White) to move</div>
+            </div>
+            <div class="move-history-card">
+                <h3>Move History</h3>
+                <div id="move-history" class="move-list"></div>
+            </div>
+            <div class="rules-card">
+                <h3>Rules</h3>
+                <div class="rules-content">
+                    <p><strong>Board:</strong> 8×8</p>
+                    <p><strong>Chess:</strong> Standard chess rules. Captured shogi pieces disappear.</p>
+                    <p><strong>Shogi:</strong> Standard shogi rules. Captured chess pieces become hand pieces:</p>
+                    <ul>
+                        <li>Pawn → 歩</li>
+                        <li>Knight → 桂</li>
+                        <li>Bishop → 銀</li>
+                        <li>Rook → 香</li>
+                        <li>Queen → 飛 or 角</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Promotion Dialog -->
+    <div class="modal-overlay" id="modal-overlay" style="display:none;">
+        <div class="modal" id="promotion-modal">
+            <h3 id="modal-title">Promotion</h3>
+            <div class="modal-options" id="modal-options"></div>
+        </div>
+    </div>
+
+    <!-- Game Over Dialog -->
+    <div class="modal-overlay" id="gameover-overlay" style="display:none;">
+        <div class="modal gameover-modal">
+            <h2 id="gameover-title">Game Over</h2>
+            <p id="gameover-message"></p>
+            <button class="btn btn-primary" id="btn-play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script src="piece-assets.js"></script>
+    <script src="chess-rules.js"></script>
+    <script src="shogi-rules.js"></script>
+    <script src="game.js"></script>
+    <script src="sound.js"></script>
+    <script src="ui.js"></script>
+</body>
+
+</html>
